@@ -1,19 +1,48 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <div class="container">
+      <vHeader />
     </div>
-    <router-view/>
+    <div class="container">
+      <router-view/>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col col-sm-12 col-md-4">
+          <router-view name="delivery"></router-view>
+        </div>
+        <div class="col col-sm-12 col-md-4">
+          <router-view name="guide"></router-view>
+        </div>
+        <div class="col col-sm-12 col-md-4">
+          <router-view name="history"></router-view>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
-<style lang="less">
+<script>
+import vHeader from './views/Header.vue'
+
+export default {
+  data(){
+    return {
+      
+    }
+  },
+  components:{
+    vHeader,
+  }
+}
+</script>
+
+<style lang="less" >
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  // text-align: center;
   color: #2c3e50;
 }
 #nav {

@@ -1,18 +1,46 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="home"  id="home-head">
+    <!-- <img alt="Vue logo" src="../assets/logo.png">
+    <HelloWorld msg="Welcome to Your Vue.js App"/> -->
+    <div class="row bg-gray">
+      <div class="col sol-sm-12 text-center ">
+        <h2>Pizza 50% off today!</h2>
+        <h3>So order yours now!</h3>
+        <div class="col-sm-12 text-center">
+          <button v-on:click="gotoMenu" class="btn btn-success">Let's Order!</button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+// import HelloWorld from '@/components/HelloWorld.vue'
 
 export default {
   name: 'home',
   components: {
-    HelloWorld
+    // HelloWorld
+  },
+  methods:{
+    gotoMenu(){
+      this.$router.push({name:'menu'})
+    }
   }
 }
 </script>
+
+<style lang="less" scoped>
+  #home-head{
+    background: #ddd url('../assets/wonderful-pizza-wallpaper-201-250-hd-wallpapers.jpg') center center;
+    background-size: cover;
+    padding: 10%;
+    height: 80vh;
+    color:#333;
+  }
+  .bg-gray{
+    background-color: rgba(255,255,255,.7);
+    padding: 10%;
+  }
+</style>
