@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from './store/store'
 
 //view
 import Home from './views/Home.vue'
@@ -17,14 +18,13 @@ import About_name from './views/about/Name.vue'
 
 Vue.use(Router)
 
-const router =  new Router({
-  mode:'history',
-  routes: [
-    {
+const router = new Router({
+  mode: 'history',
+  routes: [{
       path: '/',
       name: 'home',
       // component: Home,
-      components:{
+      components: {
         default: Home,
         delivery: About_delivery,
         history: About_history,
@@ -34,46 +34,101 @@ const router =  new Router({
     {
       path: '/about',
       name: 'about',
-      redirect:'/about/history',
+      redirect: '/about/history',
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/about/About.vue'),
-      children:[
-        {path:'/about/contact', name:'about-contact', component:About_contact, children:[
-          {path:'/phone',name:'about-phone',component:About_phone},
-          {path:'/name',name:'about-name',component:About_name},
-        ]},
-        {path:'/about/history', name:'about-history', component:About_history},
-        {path:'/about/delivery', name:'about-delivery', component:About_delivery},
-        {path:'/about/guide', name:'about-guide', component:About_guide},
+      component: () => import( /* webpackChunkName: "about" */ './views/about/About.vue'),
+      children: [{
+          path: '/about/contact',
+          name: 'about-contact',
+          redirect: '/about/contact/phone',
+          component: About_contact,
+          children: [{
+              path: '/about/contact/phone',
+              name: 'about-phone',
+              component: About_phone
+            },
+            {
+              path: '/about/contact/name',
+              name: 'about-name',
+              component: About_name
+            },
+          ]
+        },
+        {
+          path: '/about/history',
+          name: 'about-history',
+          component: About_history
+        },
+        {
+          path: '/about/delivery',
+          name: 'about-delivery',
+          component: About_delivery
+        },
+        {
+          path: '/about/guide',
+          name: 'about-guide',
+          component: About_guide
+        },
       ],
     },
-    {path: '/menu', name:'menu', component: Menu},
-    {path: '/admin', name:'admin', component: Admin, },
-    {path: '/login', name:'login', component: Login},
-    {path: '/register', name:'register', component: Register},
-    {path: '*', redirect:'/' },
+    {
+      path: '/menu',
+      name: 'menu',
+      component: Menu
+    },
+    {
+      path: '/admin',
+      name: 'admin',
+      component: Admin,
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: Register
+    },
+    {
+      path: '*',
+      redirect: '/'
+    },
   ],
   // eslint-disable-next-line
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
       return savedPosition
     } else {
-      return { x: 0, y: 0 }
+      return {
+        x: 0,
+        y: 0
+      }
     }
   },
 })
 
 //全局前置导航守卫
-/* router.beforeEach((to,from,next)=>{
+// eslint-disable-next-line
+router.beforeEach((to,from,next)=>{
+  let currentUser = window.localStorage.getItem('currentUser');
+  if (currentUser) {
+    store.dispatch('setUser', currentUser)
+  }
   if(to.path == '/login' || to.path == '/register' || to.path=='/'){
     next();
   }else{
     //判断$store.getter.islogin
-    alert('Please login!')
-    next('/login')
+    if(store.getters.isLogin){
+      next();
+    }else{
+      alert('请先登录!')
+      next('/login')
+    }
   }
-}); */
+});
 
 export default router;

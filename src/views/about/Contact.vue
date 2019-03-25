@@ -7,6 +7,7 @@
       <h4 class="card-title">联系我们</h4>
       <p>fdy409784@qq.com</p>
       <router-link :to="{name:'about-phone'}">电话</router-link>
+      <span>&nbsp;</span>
       <router-link :to="{name:'about-name'}">联系人</router-link>
 
       <router-view></router-view>

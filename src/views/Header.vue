@@ -43,11 +43,18 @@
           </li>
         </ul>
         <ul class="navbar-nav ml-auto">
-          <li>
+          <li v-show="!isLogin" class="nav-link" >
             <router-link :to="{name:'login'}" class="nav-link">登录</router-link>
           </li>
-          <li>
+          <li v-show="!isLogin" class="nav-link" >
             <router-link :to="{name:'register'}" class="nav-link">注册</router-link>
+          </li>
+
+          <li class="nav-link" style="line-height:2.5;">
+            {{currentUser}}
+          </li>
+          <li v-show="isLogin" class="nav-link" >
+            <router-link :to="{name:'login'}" class="nav-link">[退出]</router-link>
           </li>
         </ul>
       </div>
@@ -60,9 +67,21 @@ export default {
   name: "vHeader",
   data(){
     return {
-
+      
     }
   },
   components: {},
+  computed:{
+    currentUser(){
+      return this.$store.getters.currentUser;
+    },
+    isLogin(){
+      return this.$store.getters.isLogin;
+    }
+  }
 };
 </script>
+
+<style lang="less" scoped>
+  
+</style>
