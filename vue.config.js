@@ -3,7 +3,7 @@ const webpack = require("webpack");
 
 module.exports = {
     // 选项...
-    publicPath:'/',
+    publicPath:'/pizza/dist',
     devServer:{
         port:8080,
         open:true,
