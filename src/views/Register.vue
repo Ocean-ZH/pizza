@@ -53,7 +53,7 @@ export default {
               users.push(data[key].email);
             }
             let result = null;
-            result = users.some((el,i)=>{
+            result = users.some((el)=>{
               return el == this.email;
             })
             if(result){

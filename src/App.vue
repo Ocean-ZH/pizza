@@ -7,14 +7,11 @@
       <router-view/>
     </div>
     <div class="container">
-      <div class="row">
-        <div class="col col-sm-12 col-md-4">
-          <router-view name="delivery"></router-view>
-        </div>
-        <div class="col col-sm-12 col-md-4">
+      <div class="row section2">
+        <div class="col-xs-12 col-md-6">
           <router-view name="guide"></router-view>
         </div>
-        <div class="col col-sm-12 col-md-4">
+        <div class="col-xs-12 col-md-6">
           <router-view name="history"></router-view>
         </div>
       </div>
@@ -56,3 +53,10 @@ export default {
   }
 }
 </style>
+<style lang="less" scoped>
+.section2 >div >.card{
+  height:320px;
+  overflow:auto;
+}
+</style>
+

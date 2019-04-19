@@ -25,7 +25,7 @@
         </tbody>
       </table>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4 cart-box">
       <div v-if="carts.length==0">购物车内没有商品</div>
       <template v-else>
         <table class="table">
@@ -173,7 +173,7 @@ export default {
       this.axios.post('/carts.json',formData)
       .then(res=>{
         // console.log(res)
-        alert('添加成功！')
+        if(res) alert('添加成功！');
         this.$router.push('/about/history')
       })
       .catch(err=>{
@@ -202,3 +202,7 @@ export default {
   }
 };
 </script>
+
+<style lang="less" scoped>
+  
+</style>

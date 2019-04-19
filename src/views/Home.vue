@@ -4,8 +4,8 @@
     <HelloWorld msg="Welcome to Your Vue.js App"/> -->
     <div class="row bg-gray">
       <div class="col sol-sm-12 text-center ">
-        <h2>Pizza 50% off today!</h2>
-        <h3>So order yours now!</h3>
+        <h2><strong>50%</strong> off Cheese Pizza today!</h2>
+        <h4>START YOUR ORDER!</h4>
         <div class="col-sm-12 text-center">
           <button v-on:click="gotoMenu" class="btn btn-success">Let's Order!</button>
         </div>
