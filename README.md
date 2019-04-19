@@ -1,5 +1,8 @@
 # pizza
 
+## preview
+[https://ocean-zh.github.io/pizza/dist/](https://ocean-zh.github.io/pizza/dist/)
+
 ## Project setup
 ```
 npm install
