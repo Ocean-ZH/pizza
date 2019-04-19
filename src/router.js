@@ -19,7 +19,7 @@ import About_name from './views/about/Name.vue'
 Vue.use(Router)
 
 const router = new Router({
-  mode: 'history',
+  mode: 'hash',
   routes: [{
       path: '/',
       name: 'home',
@@ -115,8 +115,9 @@ const router = new Router({
 // eslint-disable-next-line
 router.beforeEach((to,from,next)=>{
   let currentUser = window.localStorage.getItem('currentUser');
+  let userId = window.localStorage.getItem('userId');
   if (currentUser) {
-    store.dispatch('setUser', currentUser)
+    store.dispatch('setUser', { id: userId, email: currentUser})
   }
   if(to.path == '/login' || to.path == '/register' || to.path=='/'){
     next();

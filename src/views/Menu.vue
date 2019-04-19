@@ -49,7 +49,7 @@
           </tbody>
         </table>
         <p>总价: {{totalPrice}} RMB</p>
-        <button class="btn btn-success btn-block">提交</button>
+        <button class="btn btn-success btn-block" @click.prevent="submitMenuData">提交</button>
       </template>
     </div>
   </div>
@@ -160,7 +160,27 @@ export default {
           .then(res => this.menuItems = res.data) */
         this.axios.get('https://v-pizza.firebaseio.com/menu.json')
           .then(res => this.$store.commit('setMenuItems',res.data))
-    }
+    },
+    submitMenuData(){
+      let userId = this.$store.getters.userId;
+      let formData = {
+        userid:userId,
+        email:this.$store.getters.currentUser,
+        carts:this.carts,
+        subtotal:this.totalPrice,
+        date:Date.now(),
+      };
+      this.axios.post('/carts.json',formData)
+      .then(res=>{
+        // console.log(res)
+        alert('添加成功！')
+        this.$router.push('/about/history')
+      })
+      .catch(err=>{
+        console.log(err)
+        alert(err)
+      })
+    },
   },
   created() {
     this.getMenuData();

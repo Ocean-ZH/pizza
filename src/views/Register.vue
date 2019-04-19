@@ -15,7 +15,7 @@
                 <input type="password" class="form-control" v-model="password" required>
               </div>
               <div class="form-group">
-                <label for="confirmPwd">密码</label>
+                <label for="confirmPwd">确认密码</label>
                 <input type="password" class="form-control" v-model="confirmPwd" required>
               </div>
               <button type="submit" class="btn btn-block btn-success">注册</button>
@@ -44,11 +44,36 @@ export default {
           password: this.password,
         };
         // console.log(this.axios)
-        this.axios.post('/users.json',formData)
-            .then(res=>{
-                console.log(res)
-                this.$router.push({name:'login'})
+        this.axios.get('/users.json')
+          .then(res=>{
+            //判断是否已有账号
+            let data = res.data;
+            let users = [];
+            for(let key in data){
+              users.push(data[key].email);
+            }
+            let result = null;
+            result = users.some((el,i)=>{
+              return el == this.email;
             })
+            if(result){
+              alert('账号已存在！')
+            }else{
+              this.axios.post('/users.json',formData)
+              .then(res=>{
+                    console.log(res)
+                    this.$router.push({name:'login'})
+              })
+              .catch(err=>{
+                console.log(err)
+                alert(err)
+              })
+            }
+          })
+          .catch(err=>{
+            console.log(err);
+            alert(err);
+        });
       }else{
           alert('2次密码不一致')
       }

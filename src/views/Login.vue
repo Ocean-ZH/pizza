@@ -39,17 +39,20 @@ export default {
                     let data = res.data;
                     let users = [];
                     for(let key in data){
+                        data[key].id = key;
                         users.push(data[key])
                     }
                     // console.log(users)
                     let result = users.filter((el)=>{
                         return el.email === this.email && el.password === el.password;
                     })
-                    console.log(result)
+                    // console.log(result)
                     if(result != null && result.length>0){
-                        this.$store.dispatch('setUser', result[0].email)
+                        // console.log(result[0])
+                        this.$store.dispatch('setUser', result[0])
                         this.$router.push({name:'home'})
                         window.localStorage.setItem('currentUser', result[0].email)
+                        window.localStorage.setItem('userId', result[0].id)
                     }else{
                         this.$store.dispatch("setUser",null)
                         alert('Username or password invalid!')
@@ -61,6 +64,7 @@ export default {
         next(vm=>{
             vm.$store.dispatch("setUser",null)
             window.localStorage.setItem('currentUser', '')
+            window.localStorage.setItem('userId', '')
         })
     }
 }

@@ -73,6 +73,7 @@ export default {
   components: {},
   computed:{
     currentUser(){
+      // console.log(this.$store)
       return this.$store.getters.currentUser;
     },
     isLogin(){
